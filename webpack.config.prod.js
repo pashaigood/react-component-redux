@@ -13,6 +13,7 @@ const GLOBALS = {
 };
 
 export default {
+  // TODO: Root resolve.
   resolve: {
     extensions: ['', '.js', '.jsx', '.json']
   },
