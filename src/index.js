@@ -2,39 +2,58 @@ import RCR from 'react-component-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Style = {
-  fontFamily: 'sans-serif'
-};
-
-// @RCR.container
 class TestComponent extends RCR.Container {
+  /**
+   * Начальное состояние компонента.
+   * @type {{counter: number, name: string}}
+   */
   state = {
     counter: 1,
-    somthElse: 'Text'
+    name: 'World'
   };
 
+  /**
+   * Список действий компонента.
+   * @type {{updateName: ((name)), doIncrement: ((number)), doDecrement: ((number))}}
+   */
   actions = {
-    doIncrement: () => {
+    updateName(name) {
       return {
         ...this.state,
-        counter: this.state.counter + 1
+        name
+      }
+    },
+
+    doIncrement (number) {
+      return {
+        ...this.state,
+        counter: this.state.counter + number
       };
     },
 
-    doDecrement: () => {
+    doDecrement(number) {
       return {
         ...this.state,
-        counter: this.state.counter - 1
+        counter: this.state.counter - number
       };
     }
   };
 
   render() {
+    const {actions, state} = this;
+
     return (
-    <div style={Style}>
-      <h1>Hello world {this.state.counter} times!</h1>
-      <button onClick={() => this.actions.doIncrement()}>+</button>
-      <button onClick={() => this.actions.doDecrement()}>-</button>
+    <div>
+      <h1>Hello {state.name} {state.counter} times!</h1>
+      <div>
+        <input
+          type="text"
+          value={state.name}
+          onChange={(event) => actions.updateName(event.target.value)}
+        />
+      </div>
+      <button onClick={() => actions.doIncrement(1)}>+</button>
+      <button onClick={() => actions.doDecrement(2)}>-</button>
     </div>
     );
   }
