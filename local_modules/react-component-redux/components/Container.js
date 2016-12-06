@@ -15,6 +15,10 @@ function tryCatch(fn, ctx) {
 }
 
 export default class Container extends React.Component {
+
+  state = {};
+  actions = {};
+
   constructor(...props) {
     super(...props);
     this.store = store;
@@ -25,7 +29,7 @@ export default class Container extends React.Component {
     return `${this.name}/${_snakeCase(name).toUpperCase()}`
   }
 
-  componentDidMount() {
+  componentWillMount() {
     store.dispatch({
       type: ActionTypes.RCR_COMPONENT_REGISTER,
       payload: {
