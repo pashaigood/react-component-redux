@@ -108,7 +108,8 @@ export default class Container extends React.Component {
       return;
     }
 
-    this.setState(storeState);
+    this.state = storeState;
+    this.forceUpdate();
   }
 
   clearCache() {
