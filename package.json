@@ -1,6 +1,6 @@
 {
   "name": "react-component-redux",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "engines": {
     "npm": ">=3"
@@ -26,7 +26,8 @@
     "open:cover": "npm run test:cover && open coverage/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
     "docs": "jsdoc2md \"local_modules/**/*.js\" > docs/api.md",
-    "preversion": "npm run docs"
+    "preversion": "npm run docs",
+    "version": "git add -A docs"
   },
   "author": "PBelugin",
   "license": "MIT",
