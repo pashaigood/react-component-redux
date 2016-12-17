@@ -7,20 +7,34 @@ import _snakeCase from 'lodash/snakeCase';
 let errorObject = { value: null };
 function tryCatch(fn, ctx) {
   try {
-    return fn.apply(ctx)
+    return fn.apply(ctx);
   } catch (e) {
-    errorObject.value = e
-    return errorObject
+    errorObject.value = e;
+    return errorObject;
   }
 }
 
-export default class Container extends React.Component {
 
-  state = {};
-  actions = {};
+/**
+ * Root "smart" container for RCR app.
+ * @class
+ * @memberOf module:react-component-redux
+ * @extends React.Component
+ */
+class Container extends React.Component {
 
-  constructor(...props) {
-    super(...props);
+  /**
+   * Construct new  RCR component
+   *
+   * @constructor
+   * @param {Object} props
+   */
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+    this.actions = {};
+
     this.store = store;
     this.name = this.constructor.name;
   }
@@ -125,3 +139,6 @@ export default class Container extends React.Component {
     this.finalMapStateToProps = null;
   }
 }
+
+
+export default Container;

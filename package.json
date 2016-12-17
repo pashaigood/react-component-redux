@@ -24,7 +24,9 @@
     "test:cover:travis": "babel-node node_modules/isparta/bin/isparta cover --root examples --report lcovonly _mocha -- --require ./tools/testSetup.js \"./{,!(node_modules)/**/}*.spec.js\" && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test -- --watch",
     "open:cover": "npm run test:cover && open coverage/index.html",
-    "analyze-bundle": "babel-node ./tools/analyzeBundle.js"
+    "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
+    "docs": "jsdoc2md \"local_modules/**/*.js\" > docs/api.md",
+    "preversion": "npm run docs"
   },
   "author": "PBelugin",
   "license": "MIT",
@@ -74,6 +76,7 @@
     "html-webpack-plugin": "2.24.0",
     "isparta": "4.0.0",
     "istanbul": "0.4.4",
+    "jsdoc-to-markdown": "2.0.1",
     "json-loader": "0.5.4",
     "mocha": "3.1.2",
     "mockdate": "1.0.4",
