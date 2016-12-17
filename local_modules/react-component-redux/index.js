@@ -1,9 +1,22 @@
 import Container from './components/Container';
-import container from './decorators/container';
 import store from './store';
 
+// /**
+//  * @alias RCR
+//  * @kind module
+//  * @typicalname RCR
+//  */
+
+/**
+ * @author PBelugin
+ * @module react-component-redux
+ * @typicalname RCR
+ * @example import RCR from 'react-component-redux';
+ */
 export default {
   Container,
-  container,
+  /**
+   * Default store.
+   */
   store
-}
+};
