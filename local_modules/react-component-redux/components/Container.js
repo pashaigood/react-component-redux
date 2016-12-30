@@ -53,8 +53,25 @@ class Container extends React.Component {
     });
 
     this.trySubscribe();
-    this.registerReducers();
-    this.mapActions();
+    this.registerReducers(this.actions);
+    this.mapActions(this.actions);
+  }
+
+  // TODO: Add cheking for hot reloading.
+  componentWillUpdate() {
+
+    // TODO: Make reload only if necessary.
+    if (module.hot) {
+      const ReactComponent = this.constructor;
+      // const comp = <ReactComponent test={{}}/>
+      const actions = (new ReactComponent).actions;
+
+      this.UnRegisterReducers();
+      this.actions = actions;
+      this.registerReducers(this.actions);
+      this.mapActions(this.actions);
+    }
+
   }
 
   componentWillUnmount() {
@@ -72,26 +89,29 @@ class Container extends React.Component {
     }
   }
 
-  mapActions() {
-    this.actions = Object.keys(this.actions).reduce((actions, name) => {
+  mapActions(actions) {
 
-      actions[name] = (function (...payload) {
+    let actionType = this.actionType.bind(this);
+    let component = this.name;
+
+    this.actions = Object.keys(actions).reduce((actions, actionName) => {
+      actions[actionName] = (function (...payload) {
         return store.dispatch({
-          type: this.actionType(name),
+          type: actionType(actionName),
           meta: {
-            component: this.name
+            component
           },
           payload
         });
-      }).bind(this);
+      });
 
       return actions;
     }, {});
   }
 
-  registerReducers() {
-    Object.keys(this.actions).forEach(name => {
-      reducers[this.actionType(name)] = this.actions[name].bind(this);
+  registerReducers(actions) {
+    Object.keys(actions).forEach(name => {
+      reducers[this.actionType(name)] = actions[name].bind(this);
     });
   }
 

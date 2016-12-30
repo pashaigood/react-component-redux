@@ -15,6 +15,7 @@ import store from './store';
  */
 export default {
   Container,
+  Component: Container,
   /**
    * Default store.
    */

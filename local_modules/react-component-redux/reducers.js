@@ -3,15 +3,15 @@ import * as ActionTypes from './constants/ActionTypes';
 /**
  *
  * @param state
- * @param {{}} actions
- * @param {string} actions.type
- * @param {{}} actions.payload
- * @param {{}} actions.meta
- * @param {string} actions.meta.component
+ * @param {{}} action
+ * @param {string} action.type
+ * @param {{}} action.payload
+ * @param {{}} action.meta
+ * @param {string} action.meta.component
  * @returns {{}}
  */
-export default function rcr(state = {}, actions) {
-  const {payload, type, meta} = actions;
+export default function rcr(state = {}, action) {
+  const {payload, type, meta} = action;
 
   switch (type) {
     case ActionTypes.RCR_COMPONENT_REGISTER:
@@ -25,10 +25,8 @@ export default function rcr(state = {}, actions) {
     {
       return typeof rcr[type] === 'function' ? {
         ...state,
-        [meta.component]: rcr[type](...payload, state)
+        [meta.component]: rcr[type](state[meta.component], ...payload)
       } : state;
     }
   }
-
-  return state;
 };
