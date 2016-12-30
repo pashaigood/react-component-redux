@@ -16,24 +16,24 @@ export default class Test extends RCR.Container {
    * @type {{updateName: ((name)), doIncrement: ((number)), doDecrement: ((number))}}
    */
   actions = {
-    updateName(name) {
+    updateName(state, name) {
       return {
-        ...this.state,
+        ...state,
         name
       }
     },
 
-    doIncrement (number) {
+    doIncrement (state, number) {
       return {
-        ...this.state,
-        counter: this.state.counter + number
+        ...state,
+        counter: state.counter + number
       };
     },
 
-    doDecrement(number) {
+    doDecrement(state, number) {
       return {
-        ...this.state,
-        counter: this.state.counter - number
+        ...state,
+        counter: state.counter - number
       };
     }
   };
