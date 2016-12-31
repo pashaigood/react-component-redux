@@ -18,7 +18,7 @@ export default function rcr(state = {}, action) {
     {
       return {
         ...state,
-        [payload.name]: payload.state
+        [payload.name]: module.hot && state[payload.name] ? state[payload.name] : payload.state
       }
     }
     default:

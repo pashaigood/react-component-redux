@@ -1,5 +1,8 @@
 import Container from './components/Container';
 import store from './store';
+import container from './decorators/container';
+import action from './decorators/action';
+
 
 // /**
 //  * @alias RCR
@@ -14,6 +17,8 @@ import store from './store';
  * @example import RCR from 'react-component-redux';
  */
 export default {
+  container,
+  action,
   Container,
   Component: Container,
   /**
