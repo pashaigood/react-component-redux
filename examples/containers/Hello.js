@@ -1,14 +1,16 @@
 import React from 'react';
 import RCR from 'react-component-redux';
 
-export default class Test extends RCR.Container {
+@RCR.container
+export default class Test extends React.Component {
   /**
    * Начальное состояние компонента.
    * @type {{counter: number, name: string}}
    */
   state = {
     counter: 1,
-    name: 'friend'
+    name: 'friend',
+    print: undefined
   };
 
   /**
@@ -38,12 +40,28 @@ export default class Test extends RCR.Container {
     }
   };
 
+  /**
+   * Действие компонента, нозначенное как метод первого уровня.
+   *
+   * @param state
+   * @returns {*}
+   */
+  @RCR.action
+  printState(state) {
+    state = {
+      ...state,
+    };
+    delete state.print;
+    state.print = JSON.stringify(state, null, 2);
+    return state;
+  }
+
   render() {
     const {actions, state} = this;
 
     return (
       <div>
-        <h1>Hello {state.name} {state.counter} times!</h1>
+        <h1>Hello {state.name} {state.counter} time!s!</h1>
         <div className="form-group">
           <input
             className="form-control"
@@ -58,6 +76,13 @@ export default class Test extends RCR.Container {
         <button
           className="btn btn-default"
           onClick={() => actions.doDecrement(2)}>-</button>
+        <button
+          className="btn btn-default"
+          onClick={() => this.printState()}
+        >Print state</button>
+        <br/>
+        <br/>
+        <pre>{state.print || 'Click on the print button to see current state.'}</pre>
       </div>
     );
   }
