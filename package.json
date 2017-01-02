@@ -9,6 +9,7 @@
   "files": [
     "bin/",
     "dist/",
+    "lib/",
     "docs/"
   ],
   "scripts": {
