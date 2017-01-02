@@ -28,7 +28,7 @@ function functionName(fun) {
 }
 
 export function componentWillMount() {
-  this.name = functionName(this.constructor);
+  this.name = functionName(this.constructor) + (this.props.name ? `_${this.props.name}` : '');
   this.actions = this.actions || {};
   this.rootActions = this.rootActions || {};
 
@@ -81,7 +81,7 @@ export function tryUnsubscribe() {
 }
 
 /**
- * Registers reducers bu actions.
+ * Registers reducers actions.
  *
  * @param actions
  */
@@ -124,6 +124,13 @@ export function mapActions(actions, rootActions) {
   });
 }
 
+/**
+ * Creates action dispatcher.
+ *
+ * @param component
+ * @param type
+ * @returns {Function}
+ */
 function createAction(component, type) {
   return function (...payload) {
     return store.dispatch({
