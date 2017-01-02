@@ -57,7 +57,7 @@ export default class Test extends React.Component {
   };
 
   /**
-   * Действие компонента, нозначенное как метод первого уровня.
+   * Действие компонента, назначенное как метод первого уровня.
    *
    * @param state
    * @returns {*}
