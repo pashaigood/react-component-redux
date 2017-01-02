@@ -6,9 +6,18 @@
 ```javascript
 import React from 'react';
 import RCR from 'react-component-redux';
+import view from './view';
 
 @RCR.container
 export default class Test extends React.Component {
+  /**
+   * Отображение компонента,
+   * используется, если не назначен метод render.
+   *
+   * @type {Function}
+   */
+  view = view;
+
   /**
    * Начальное состояние компонента.
    * @type {{counter: number, name: string}}
@@ -21,7 +30,7 @@ export default class Test extends React.Component {
 
   /**
    * Список действий компонента.
-   * 
+   *
    * @type {{updateName: ((state, name)), doIncrement: ((state, number)), doDecrement: ((state, number))}}
    */
   actions = {
@@ -61,37 +70,6 @@ export default class Test extends React.Component {
     delete state.print;
     state.print = JSON.stringify(state, null, 2);
     return state;
-  }
-
-  render() {
-    const {actions, state} = this;
-
-    return (
-      <div>
-        <h1>Hello {state.name} {state.counter} times!</h1>
-        <div className="form-group">
-          <input
-            className="form-control"
-            type="text"
-            value={state.name}
-            onChange={(event) => actions.updateName(event.target.value)}
-          />
-        </div>
-        <button
-          className="btn btn-default"
-          onClick={() => actions.doIncrement(1)}>+</button>
-        <button
-          className="btn btn-default"
-          onClick={() => actions.doDecrement(2)}>-</button>
-        <button
-          className="btn btn-default"
-          onClick={() => this.printState()}
-        >Print state</button>
-        <br/>
-        <br/>
-        <pre>{state.print || 'Click on the print button to see current state.'}</pre>
-      </div>
-    );
   }
 }
 ```
