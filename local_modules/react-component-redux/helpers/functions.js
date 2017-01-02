@@ -143,6 +143,17 @@ function createAction(component, type) {
   }
 }
 
+export function render() {
+  const {props, state, actions} = this;
+
+  if (typeof this.view !== 'function') {
+    console.warn('View should be a function.');
+    return null;
+  }
+
+  return (this.view && this.view({props, state, actions, component: this})) || null;
+}
+
 /**
  *
  * @param obj
