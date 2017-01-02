@@ -10,7 +10,8 @@
     "bin/",
     "dist/",
     "lib/",
-    "docs/"
+    "docs/",
+    "README.md"
   ],
   "scripts": {
     "start-message": "babel-node tools/startMessage.js",
