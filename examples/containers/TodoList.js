@@ -3,9 +3,10 @@ import RCR from 'react-component-redux';
 import Immutable from 'immutable';
 import List from '../components/todoList/List';
 
+const {Component} = RCR;
 let todoId = 0;
 
-export default class TodoList extends RCR.Container {
+export default class TodoList extends Component {
 
   /**
    * @type {Immutable.Map}
@@ -16,23 +17,23 @@ export default class TodoList extends RCR.Container {
   });
 
   actions = {
-    updateName: (name) => {
-      return this.state.set('name', name);
+    updateName: (state, name) => {
+      return state.set('name', name);
     },
 
-    addItem: () => {
-      return this.state
+    addItem: (state) => {
+      return state
         .update('todos', todos => todos.push(Immutable.Map({
           id: todoId++,
           done: false,
-          name: this.state.get('name')
+          name: state.get('name')
         })))
         .set('name', '');
     },
 
-    toggleTodo: (id) => {
+    toggleTodo: (state, id) => {
 
-      return this.state.update('todos', todos => todos.update(
+      return state.update('todos', todos => todos.update(
         todos.findIndex(todo => todo.get('id') === id),
         todo => todo.set('done', !todo.get('done'))
       ));

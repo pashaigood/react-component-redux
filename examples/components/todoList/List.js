@@ -6,7 +6,7 @@ const Style = {
   overflowY: 'scroll'
 };
 
-export default class List extends React.PureComponent {
+export default class List extends React.Component {
   static propTypes = {
     todos: React.PropTypes.object.isRequired,
     toggleDone: React.PropTypes.func.isRequired
