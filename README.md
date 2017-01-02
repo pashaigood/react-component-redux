@@ -4,62 +4,93 @@
 
 Пример:
 ```javascript
-import RCR from 'react-component-redux';
 import React from 'react';
+import RCR from 'react-component-redux';
 
-class TestComponent extends RCR.Container {
+@RCR.container
+export default class Test extends React.Component {
   /**
    * Начальное состояние компонента.
    * @type {{counter: number, name: string}}
    */
   state = {
     counter: 1,
-    name: 'World'
+    name: 'friend',
+    print: undefined
   };
 
   /**
    * Список действий компонента.
-   * @type {{updateName: ((name)), doIncrement: ((number)), doDecrement: ((number))}}
+   * 
+   * @type {{updateName: ((state, name)), doIncrement: ((state, number)), doDecrement: ((state, number))}}
    */
   actions = {
-    updateName(name) {
+    updateName(state, name) {
       return {
-        ...this.state,
+        ...state,
         name
       }
     },
 
-    doIncrement (number) {
+    doIncrement (state, number) {
       return {
-        ...this.state,
-        counter: this.state.counter + number
+        ...state,
+        counter: state.counter + number
       };
     },
 
-    doDecrement(number) {
+    doDecrement(state, number) {
       return {
-        ...this.state,
-        counter: this.state.counter - number
+        ...state,
+        counter: state.counter - number
       };
     }
   };
+
+  /**
+   * Действие компонента, нозначенное как метод первого уровня.
+   *
+   * @param state
+   * @returns {*}
+   */
+  @RCR.action
+  printState(state) {
+    state = {
+      ...state,
+    };
+    delete state.print;
+    state.print = JSON.stringify(state, null, 2);
+    return state;
+  }
 
   render() {
     const {actions, state} = this;
 
     return (
-    <div>
-      <h1>Hello {state.name} {state.counter} times!</h1>
       <div>
-        <input
-          type="text"
-          value={state.name}
-          onChange={(event) => actions.updateName(event.target.value)}
-        />
+        <h1>Hello {state.name} {state.counter} times!</h1>
+        <div className="form-group">
+          <input
+            className="form-control"
+            type="text"
+            value={state.name}
+            onChange={(event) => actions.updateName(event.target.value)}
+          />
+        </div>
+        <button
+          className="btn btn-default"
+          onClick={() => actions.doIncrement(1)}>+</button>
+        <button
+          className="btn btn-default"
+          onClick={() => actions.doDecrement(2)}>-</button>
+        <button
+          className="btn btn-default"
+          onClick={() => this.printState()}
+        >Print state</button>
+        <br/>
+        <br/>
+        <pre>{state.print || 'Click on the print button to see current state.'}</pre>
       </div>
-      <button onClick={() => actions.doIncrement(1)}>+</button>
-      <button onClick={() => actions.doDecrement(2)}>-</button>
-    </div>
     );
   }
 }

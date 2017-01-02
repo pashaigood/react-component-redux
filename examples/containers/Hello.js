@@ -15,7 +15,8 @@ export default class Test extends React.Component {
 
   /**
    * Список действий компонента.
-   * @type {{updateName: ((name)), doIncrement: ((number)), doDecrement: ((number))}}
+   *
+   * @type {{updateName: ((state, name)), doIncrement: ((state, number)), doDecrement: ((state, number))}}
    */
   actions = {
     updateName(state, name) {
