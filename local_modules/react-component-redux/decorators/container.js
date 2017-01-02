@@ -3,16 +3,17 @@ import '../reducers';
 import '../components/Container';
 import * as functions from '../helpers/functions';
 
-export default Component => {
+export default function (Component) {
 
   Object.assign(Component.prototype, functions);
 
-  return class Container extends React.Component {
-    static propTypes = Component.propTypes;
-
+  class Container extends React.Component {
     render() {
       return <Component {...this.props}/>;
     }
   }
+
+  Container.propTypes = Component.propTypes;
+  return Container;
 }
 
