@@ -12,8 +12,6 @@
     "docs/"
   ],
   "scripts": {
-    "preinstall": "node tools/nodeVersionCheck.js",
-    "setup": "node tools/setup/setupMessage.js && npm install && node tools/setup/setup.js",
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm-run-all --parallel start-message remove-dist",
     "start": "npm-run-all --parallel test:watch open:examples lint:watch",
