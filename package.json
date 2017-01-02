@@ -1,7 +1,7 @@
 {
   "name": "react-component-redux",
   "version": "0.0.0-semantic-release",
-  "description": "",
+  "description": "Experiments with redux.",
   "engines": {
     "npm": ">=3"
   },
