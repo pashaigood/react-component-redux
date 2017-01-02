@@ -33,7 +33,7 @@ export default class TodoList extends Component {
 
     toggleTodo: (state, id) => {
 
-      return state.update('tosdos', todos => todos.update(
+      return state.update('todos', todos => todos.update(
         todos.findIndex(todo => todo.get('id') === id),
         todo => todo.set('done', !todo.get('done'))
       ));

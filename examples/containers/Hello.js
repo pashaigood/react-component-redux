@@ -61,7 +61,7 @@ export default class Test extends React.Component {
 
     return (
       <div>
-        <h1>Hello {state.name} {state.counter} time!s!</h1>
+        <h1>Hello {state.name} {state.counter} times!</h1>
         <div className="form-group">
           <input
             className="form-control"
