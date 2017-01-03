@@ -1,16 +1,23 @@
 import React from 'react';
 import RCR from 'react-component-redux';
 import view from './view';
+import render from './render';
 
 @RCR.container
 export default class Test extends React.Component {
   /**
-   * Отображение компонента,
+   * Отображение компонента, чистая функция
    * используется, если не назначен метод render.
    *
    * @type {Function}
    */
-  view = view;
+  // view = view;
+
+  /**
+   * Рендер как отдельная функция.
+   * @type {Function}
+   */
+  render = render;
 
   /**
    * Начальное состояние компонента.
