@@ -1,3 +1,4 @@
+# RCR [![Build Status](https://travis-ci.org/pashaigood/react-component-redux.svg?branch=master)](https://travis-ci.org/pashaigood/react-component-redux)
 **Redux** отличная библиотека, вот только слишком низкоуровневая для повседневного использования.
 
 Идея в том, что бы упростить использование и сделать процесс создания компонентов как можно быстрее.
@@ -6,20 +7,13 @@
 ```javascript
 import React from 'react';
 import RCR from 'react-component-redux';
-import view from './view';
 
 @RCR.container
 export default class Test extends React.Component {
-  /**
-   * Отображение компонента,
-   * используется, если не назначен метод render.
-   *
-   * @type {Function}
-   */
-  view = view;
 
   /**
    * Начальное состояние компонента.
+   * 
    * @type {{counter: number, name: string}}
    */
   state = {
@@ -56,21 +50,27 @@ export default class Test extends React.Component {
     }
   };
 
-  /**
-   * Действие компонента, назначенное как метод первого уровня.
-   *
-   * @param state
-   * @returns {*}
-   */
-  @RCR.action
-  printState(state) {
-    state = {
-      ...state,
-    };
-    delete state.print;
-    state.print = JSON.stringify(state, null, 2);
-    return state;
-  }
+  render = () => (
+    <div>
+      <h1>Hello {this.state.name} {this.state.counter} times!</h1>
+      <div className="form-group">
+        <input
+          className="form-control"
+          type="text"
+          value={this.state.name}
+          onChange={e => this.actions.updateName(e.target.value)}
+        />
+      </div>
+      <button
+        className="btn btn-default"
+        onClick={() => this.actions.doIncrement(1)}>+
+      </button>
+      <button
+        className="btn btn-default"
+        onClick={() => this.actions.doDecrement(2)}>-
+      </button>
+    </div>
+  )
 }
 ```
 
