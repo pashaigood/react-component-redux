@@ -82,6 +82,27 @@ export default class Test extends React.Component {
 Да конечно, этот подход не универсален, но покрывает простое использование **Redux**.
 В данном подходе есть противоречия с философией чистых функций, и это вопрос обсуждаем, можно ли заменить на _договоренность_ в угоду увеличения производительности.
 
+## Множественное использование компонента.
+
+Большая проблема использование redux - переиспользование компонента.
+Автоматизируя работу с данными этот вопрос решается очень просто.
+
+![multicomponents](./images/multiComponent.jpg)
+[код компонента](./examples/containers/MultiInstance.js)
+
+Использование очень простое, достаточно просто дать экземпляру собственное имя:
+```html
+<div className="row">
+  <div className="col-xs-4"><MultiInstance title="First instance with common state."/></div>
+  <div className="col-xs-4">
+    <MultiInstance name="other-instance" title="Second instance with own state."/>
+  </div>
+  <div className="col-xs-4"><MultiInstance title="Third instance with common state."/></div>
+</div>
+```
+Таким образом создастся новое хранилище **other-instance**, на котором может ссылаться любое количество новых экземпляров компонента.
+
+
 ## Подробнее
 Вот так выглядит простой набор действий:
 

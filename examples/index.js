@@ -17,7 +17,9 @@ ReactDOM.render(
     </div>
     <div className="row">
       <div className="col-xs-4"><MultiInstance title="First instance with common state."/></div>
-      <div className="col-xs-4"><MultiInstance title="Second instance with own state." name="other-instance"/></div>
+      <div className="col-xs-4">
+        <MultiInstance name="other-instance" title="Second instance with own state."/>
+      </div>
       <div className="col-xs-4"><MultiInstance title="Third instance with common state."/></div>
     </div>
   </div>
