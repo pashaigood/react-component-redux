@@ -20,7 +20,7 @@ export function actionType(name) {
   return `${this.name}/${_snakeCase(name).toUpperCase()}`
 }
 
-function functionName(fun) {
+export function functionName(fun) {
   var ret = fun.toString();
   ret = ret.substr('function '.length);
   ret = ret.substr(0, ret.indexOf('('));
@@ -28,7 +28,7 @@ function functionName(fun) {
 }
 
 export function componentWillMount() {
-  this.name = functionName(this.constructor) + (this.props.name ? `_${this.props.name}` : '');
+  this.name = this.name || functionName(this.constructor) + (this.props.name ? `_${this.props.name}` : '');
   this.actions = this.actions || {};
   this.rootActions = this.rootActions || {};
 
