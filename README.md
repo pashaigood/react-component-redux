@@ -82,14 +82,14 @@ export default class Test extends React.Component {
 
 ## Множественное использование компонента.
 
-Большая проблема использование redux - переиспользование компонента.
-Автоматизируя работу с данными этот вопрос решается очень просто.
+Большая проблема redux - переиспользование компонента.
+После автоматизации работы с данными этот вопрос решается очень просто.
 
 ![multicomponents](./images/multiComponent.jpg)
 
 [код компонента](./examples/containers/MultiInstance.js)
 
-Использование очень простое, достаточно просто дать экземпляру собственное имя:
+Использование очень простое, достаточно дать экземпляру собственное имя:
 ```html
 <div className="row">
   <div className="col-xs-4"><MultiInstance title="First instance with common state."/></div>
