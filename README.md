@@ -13,13 +13,11 @@ export default class Test extends React.Component {
 
   /**
    * Начальное состояние компонента.
-   * 
    * @type {{counter: number, name: string}}
    */
   state = {
     counter: 1,
-    name: 'friend',
-    print: undefined
+    name: 'friend'
   };
 
   /**
@@ -88,6 +86,7 @@ export default class Test extends React.Component {
 Автоматизируя работу с данными этот вопрос решается очень просто.
 
 ![multicomponents](./images/multiComponent.jpg)
+
 [код компонента](./examples/containers/MultiInstance.js)
 
 Использование очень простое, достаточно просто дать экземпляру собственное имя:
@@ -101,7 +100,6 @@ export default class Test extends React.Component {
 </div>
 ```
 Таким образом создастся новое хранилище **other-instance**, на котором может ссылаться любое количество новых экземпляров компонента.
-
 
 ## Подробнее
 Вот так выглядит простой набор действий:

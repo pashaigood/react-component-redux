@@ -10,8 +10,7 @@ export default class Test extends React.Component {
    */
   state = {
     counter: 1,
-    name: 'friend',
-    print: undefined
+    name: 'friend'
   };
 
   /**
