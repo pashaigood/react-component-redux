@@ -1,7 +1,7 @@
 # RCR [![Build Status](https://travis-ci.org/pashaigood/react-component-redux.svg?branch=master)](https://travis-ci.org/pashaigood/react-component-redux) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 **Redux** отличная библиотека, вот только слишком низкоуровневая для повседневного использования.
 
-Идея в том, что бы упростить использование и сделать процесс создания компонентов как можно быстрее.
+Идея в том, чтобы упростить использование и сделать процесс создания компонентов как можно быстрее.
 
 Пример:
 ```javascript
