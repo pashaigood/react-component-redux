@@ -81,13 +81,15 @@ export function tryUnsubscribe() {
 }
 
 /**
- * Registers reducers actions.
+ * Registers reducers.
  *
- * @param actions
+ * @param reducersToRegistry
  */
-export function registerReducers(actions) {
-  Object.keys(actions).forEach(name => {
-    reducers[this.actionType(name)] = actions[name].bind(this);
+export function registerReducers(reducersToRegistry) {
+  Object.keys(reducersToRegistry).forEach(name => {
+    if (typeof reducersToRegistry[name] === 'function') {
+      reducers[this.actionType(name)] = reducersToRegistry[name].bind(this);
+    }
   });
 }
 
@@ -97,8 +99,8 @@ export function registerReducers(actions) {
  * TODO: Implement unregister of root actions.
  * @constructor
  */
-export function unRegisterReducers(actions) {
-  Object.keys(actions).forEach(name => {
+export function unRegisterReducers(reducersToUnregister) {
+  Object.keys(reducersToUnregister).forEach(name => {
     delete reducers[this.actionType(name)];
   });
 }
@@ -106,20 +108,23 @@ export function unRegisterReducers(actions) {
 /**
  * Creates action dispatchers.
  *
- * @param actions
- * @param rootActions
+ * @param reducers
+ * @param rootReducers
  */
-export function mapActions(actions, rootActions) {
+export function mapActions(reducers, rootReducers) {
 
   let actionType = this.actionType.bind(this);
   let component = this.name;
 
-  this.actions = Object.keys(actions).reduce((actions, actionName) => {
+  this.actions = Object.keys(reducers).reduce((actions, actionName) => {
+    if (typeof reducers[actionName] != 'function') {
+      return actions;
+    }
     actions[actionName] = createAction(component, actionType(actionName));
     return actions;
   }, {});
 
-  rootActions && Object.keys(rootActions).map(actionName => {
+  rootReducers && Object.keys(rootReducers).map(actionName => {
     this[actionName] = createAction(component, actionType(actionName));
   });
 }
