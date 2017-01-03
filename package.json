@@ -114,5 +114,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/pashaigood/react-component-redux.git"
+  },
+  "release": {
+    "analyzeCommits": "./tools/semantic-release/commit-analyzer"
   }
 }
