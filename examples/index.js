@@ -6,6 +6,7 @@ import TodoList from './containers/TodoList';
 import MultiInstance from './containers/MultiInstance';
 import PureComponent from './containers/Pure/Component';
 import PureFunction from './containers/Pure/Function';
+import './middlewares/speech';
 
 ReactDOM.render(
   <div className="container">
