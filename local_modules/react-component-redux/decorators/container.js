@@ -7,17 +7,11 @@ import _omit from 'lodash/omit';
 export default function (Component) {
 
   Object.assign(Component.prototype, _omit(functions, ['render']));
+
   if (! Component.prototype.render) {
     Component.prototype.render = functions.render;
   }
 
-  class Container extends React.Component {
-    render() {
-      return <Component {...this.props}/>;
-    }
-  }
-
-  Container.propTypes = Component.propTypes;
-  return Container;
+  return Component;
 }
 
