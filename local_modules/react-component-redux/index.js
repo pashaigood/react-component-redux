@@ -3,6 +3,7 @@ import store from './store';
 import container from './decorators/container';
 import action from './decorators/action';
 import pure from './decorators/pure';
+import middlewares from './middlewares';
 
 
 // /**
@@ -31,5 +32,7 @@ export default {
   /**
    * Default store.
    */
-  store
+  store,
+
+  middlewares
 };

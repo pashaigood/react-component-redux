@@ -32,4 +32,4 @@ export default (Component, params) => {
   }
 
   return Container;
-}
+};

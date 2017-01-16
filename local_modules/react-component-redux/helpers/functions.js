@@ -6,29 +6,20 @@ import reducers from '../reducers';
 import store from '../store';
 import _snakeCase from 'lodash/snakeCase';
 
-/*let errorObject = { value: null };
-function tryCatch(fn, ctx) {
-  try {
-    return fn.apply(ctx);
-  } catch (e) {
-    errorObject.value = e;
-    return errorObject;
-  }
-}*/
-
-export function actionType(name) {
-  return `${this.name}/${_snakeCase(name).toUpperCase()}`
+export function actionType(actionName) {
+  return `${this.name}/${_snakeCase(actionName).toUpperCase()}`;
 }
 
 export function functionName(fun) {
-  var ret = fun.toString();
+  let ret = fun.toString();
   ret = ret.substr('function '.length);
   ret = ret.substr(0, ret.indexOf('('));
   return ret;
 }
 
 export function componentWillMount() {
-  this.name = this.name || functionName(this.constructor) + (this.props.name ? `_${this.props.name}` : '');
+  this._name = this.name || functionName(this.constructor);
+  this.name = this.name || this._name + (this.props.name ? `_${this.props.name}` : '');
   this.actions = this.actions || {};
   this.rootActions = this.rootActions || {};
 
@@ -115,17 +106,19 @@ export function mapActions(reducers, rootReducers) {
 
   let actionType = this.actionType.bind(this);
   let component = this.name;
+  let name = this._name;
+  const _createAction = createAction.bind(null, component, name, this.props.name);
 
   this.actions = Object.keys(reducers).reduce((actions, actionName) => {
     if (typeof reducers[actionName] != 'function') {
       return actions;
     }
-    actions[actionName] = createAction(component, actionType(actionName));
+    actions[actionName] = _createAction(actionName, actionType(actionName));
     return actions;
   }, {});
 
   rootReducers && Object.keys(rootReducers).map(actionName => {
-    this[actionName] = createAction(component, actionType(actionName));
+    this[actionName] = _createAction(actionName, actionType(actionName));
   });
 }
 
@@ -133,19 +126,23 @@ export function mapActions(reducers, rootReducers) {
  * Creates action dispatcher.
  *
  * @param component
+ * @param name
  * @param type
  * @returns {Function}
  */
-function createAction(component, type) {
+function createAction(component, name, instance, actionName, type) {
   return function (...payload) {
     return store.dispatch({
       meta: {
-        component
+        actionName,
+        component,
+        instance,
+        name
       },
       type,
       payload
     });
-  }
+  };
 }
 
 export function render() {
