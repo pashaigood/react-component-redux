@@ -8,15 +8,24 @@ import {functionName} from '../helpers/functions';
 /**
  *
  * @param {React.Component} Component
- * @param {{actions: Object, state: Object, name: String}} params
+ * @param {{actions: Object, state: Object, name: String, reducers: String, view: Function}} params
  * @returns {Container}
  */
-export default (Component, params) => {
+export default function (Component, params) {
+
+  if (! arguments[1]) {
+    params = Component;
+    Component = params.view;
+    delete params.view;
+  }
+
+  const state = params.state || params.reducers.state;
+  const actions = params.actions || params.reducers;
 
   @container
   class Container extends React.PureComponent {
-    state = params.state;
-    actions = params.actions;
+    state = state;
+    actions = actions;
 
     constructor(props) {
       super(props);
