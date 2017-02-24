@@ -1,7 +1,7 @@
 import './index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Test from './containers/Hello';
+import Hello from './containers/Hello';
 import TodoList from './containers/TodoList';
 import MultiInstance from './containers/MultiInstance';
 import PureComponent from './containers/Pure/Component';
@@ -12,7 +12,7 @@ ReactDOM.render(
   <div className="container">
     <div className="row">
       <div className="col-xs-6">
-        <Test />
+        <Hello />
       </div>
       <div className="col-xs-6">
         <TodoList />

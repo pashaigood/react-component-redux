@@ -1,11 +1,12 @@
 import React from 'react';
 import RCR from 'react-component-redux';
 
+// Apply the decorator.
 @RCR.container
 export default class Hello extends React.Component {
 
   /**
-   * Начальное состояние компонента.
+   * Write the initial state.
    */
   state = {
     counter: 1,
@@ -13,7 +14,7 @@ export default class Hello extends React.Component {
   };
 
   /**
-   * Список действий компонента.
+   * Describe the component's actions list.
    */
   actions = {
     updateName(state, name) {
