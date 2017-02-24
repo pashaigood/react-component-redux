@@ -4,7 +4,15 @@
     "react",
     "stage-1"
   ],
-  "plugins": ["transform-decorators-legacy"],
+  "plugins": [
+    ["transform-runtime", {
+      "helpers": true,
+      "polyfill": false,
+      "regenerator": true,
+      "moduleName": "babel-runtime"
+    }],
+    "transform-decorators-legacy"
+  ],
   "env": {
     "development": {
       "presets": [
