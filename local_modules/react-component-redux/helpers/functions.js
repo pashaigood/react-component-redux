@@ -6,19 +6,29 @@ import reducers from '../reducers';
 import store from '../store';
 import _snakeCase from 'lodash/snakeCase';
 
+let componentCounter = 0;
+
 export function actionType(actionName) {
   return `${this.name}/${_snakeCase(actionName).toUpperCase()}`;
 }
 
 export function functionName(fun) {
-  let ret = fun.toString();
-  ret = ret.substr('function '.length);
-  ret = ret.substr(0, ret.indexOf('('));
+  let ret;
+  if (process.env.NODE_ENV === 'production') {
+    fun.key = fun.key || componentCounter++;
+    ret = `rcr${fun.key}`;
+  }
+  else {
+    ret = fun.toString();
+    ret = ret.substr('function '.length);
+    ret = ret.substr(0, ret.indexOf('('));
+  }
+
   return ret;
 }
 
 export function componentWillMount() {
-  this._name = this.name || functionName(this.constructor);
+  this._name = functionName(this.constructor);
   this.name = this.name || this._name + (this.props.name ? `_${this.props.name}` : '');
   this.actions = this.actions || {};
   this.rootActions = this.rootActions || {};
