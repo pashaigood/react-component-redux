@@ -6,6 +6,7 @@ import TodoList from './containers/TodoList';
 import MultiInstance from './containers/MultiInstance';
 import PureComponent from './containers/Pure/Component';
 import PureFunction from './containers/Pure/Function';
+import PureFunction2 from './containers/Pure/Function2';
 import './middlewares/speech';
 
 ReactDOM.render(
@@ -26,11 +27,14 @@ ReactDOM.render(
       <div className="col-xs-4"><MultiInstance title="Third instance with common state."/></div>
     </div>
     <div className="row">
-      <div className="col-xs-4">
+      <div className="col-xs-3">
         <PureComponent/>
       </div>
-      <div className="col-xs-4">
+      <div className="col-xs-3">
         <PureFunction/>
+      </div>
+      <div className="col-xs-3">
+        <PureFunction2/>
       </div>
     </div>
   </div>

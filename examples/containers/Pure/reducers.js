@@ -1,5 +1,5 @@
 export const state = {
-  name: undefined
+  number: undefined
 };
 
 export function random(state) {

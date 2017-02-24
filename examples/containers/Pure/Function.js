@@ -1,8 +1,6 @@
 import React from 'react';
 import RCR from 'react-component-redux';
-import * as actions from  './reducers';
-import {state} from  './reducers';
-
+import * as reducers from  './reducers';
 
 function PureFunction({number, random}) {
   return (
@@ -13,7 +11,4 @@ function PureFunction({number, random}) {
   );
 }
 
-export default RCR.pure(PureFunction, {
-  state,
-  actions
-});
+export default RCR.pure(PureFunction, {reducers});
