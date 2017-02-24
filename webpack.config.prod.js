@@ -23,19 +23,12 @@ export default {
   debug: true,
   devtool: 'source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   noInfo: true, // set to false to see a list of every file being bundled.
-  entry: path.resolve(__dirname, 'local_modules/react-component-redux/index'),
+  entry: path.resolve(__dirname, 'examples/index.js'),
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
-  /*output: {
+  output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name].[chunkhash].js'
-
-  },*/
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    library: 'RCR',
-    libraryTarget: 'umd',
-    filename: 'index.js'
   },
   plugins: [
     // Hash the files using MD5 so that their names change when the content changes.
@@ -46,7 +39,6 @@ export default {
 
     // Tells React to build in prod mode. https://facebook.github.io/react/downloads.html
     new webpack.DefinePlugin(GLOBALS),
-/*
     // Generate an external css file with a hash in the filename
     new ExtractTextPlugin('[name].[contenthash].css'),
 
@@ -69,13 +61,13 @@ export default {
       // Note that you can add custom options here if you need to handle other custom logic in index.html
       // To track JavaScript errors via TrackJS, sign up for a free trial at TrackJS.com and enter your token below.
       trackJSToken: ''
-    }),*/
+    }),
 
     // Eliminate duplicate packages when generating bundle
     new webpack.optimize.DedupePlugin(),
 
     // Minify JS
-    // new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin()
   ],
   module: {
     loaders: [
