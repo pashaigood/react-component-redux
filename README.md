@@ -1,7 +1,7 @@
 # RCR [![Build Status](https://travis-ci.org/pashaigood/react-component-redux.svg?branch=master)](https://travis-ci.org/pashaigood/react-component-redux) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-**Redux** отличная библиотека, вот только слишком низкоуровневая для повседневного использования.
+**Redux** a great library, that's just too low-level for everyday use.
 
-Идея в том, чтобы упростить использование и сделать процесс создания компонентов как можно быстрее.
+The idea is to simplify the usage and make the process of creating components as quickly as possible.
 
 Пример:
 ```javascript
@@ -73,24 +73,56 @@ export default class Hello extends React.Component {
 }
 ```
 
-И это весть код!
+And it's all the code!
 
-Мы абстрагировались от низкого уровня управления данными, к которому всегда можем вернутся и получили **умный** компонент.
+Want even more clean code? You are welcome!
 
-Не нужно настраивать ни хранилища, не нужно писать ни _actions_, ни _actionsCreators_, ни _reducers_.
-Да конечно, этот подход не универсален, но покрывает простое использование **Redux**.
-В данном подходе есть противоречия с философией чистых функций, и это вопрос обсуждаем, можно ли заменить на _договоренность_ в угоду увеличения производительности.
+```javascript
+// PureComponent.js
+import React from 'react';
+import RCR from 'react-component-redux';
+import * as reducers from  './reducers';
 
-## Множественное использование компонента.
+function PureFunction({number, random}) {
+  return (
+    <div>
+      <h2>Pure</h2>
+      <pre onClick={e => random()}>{number || 'Click to see some random magic!'}</pre>
+    </div>
+  );
+}
 
-Большая проблема redux - переиспользование компонента.
-После автоматизации работы с данными этот вопрос решается очень просто.
+export default RCR.pure(PureFunction, {reducers});
+```
+
+```javascript
+// reducers.js
+export const state = {
+  number: undefined
+};
+
+export function random(state) {
+  return {
+    ...state,
+    number: Math.round(Math.random() * 1000)
+  };
+}
+```
+
+We abstracted from low-level data management, which can always come back and got a **smart** component.
+No need to set no store, no need to write any _actions_ or _actionsCreators_ or _reducers_.
+Yes, of course, this approach is not universal, but it covers the simple use of **Redux**.
+
+## Multiple use of components
+
+Most **Redux** problem - component reuse.
+After the automation of the data, this problem is solved very simply.
 
 ![multicomponents](./images/multiComponent.jpg)
 
-[код компонента](./examples/containers/MultiInstance.js)
+[component code example](./examples/containers/MultiInstance.js)
 
-Использование очень простое, достаточно дать экземпляру собственное имя:
+Using a very simple, enough to give the instance its own name:
 ```html
 <div className="row">
   <div className="col-xs-4"><MultiInstance title="First instance with common state."/></div>
@@ -100,14 +132,14 @@ export default class Hello extends React.Component {
   <div className="col-xs-4"><MultiInstance title="Third instance with common state."/></div>
 </div>
 ```
-Таким образом создастся новое хранилище **other-instance**, на котором может ссылаться любое количество новых экземпляров компонента.
+Thus is created a new repository **other-instance**, which can be referenced any number of new instances of a component.
 
-## Подробнее
-Вот так выглядит простой набор действий:
+## More
+Here's what a simple set of actions:
 
 ![actions](./images/actions.jpg)
 
-Вот так будет выглядеть действие:
+Here is the action:
 
 ```json
 {
@@ -121,4 +153,4 @@ export default class Hello extends React.Component {
 }
 ```
 
-Самым интересным тут будет _payload_, который по сути является списком параметром, передаваемых функции _actions.doDecrement_.
+The most interesting here is _payload_, which is essentially a list of parameters that are passed _actions.doDecrement_ function.
