@@ -3,7 +3,7 @@
 
 The idea is to simplify the usage and make the process of creating components as quickly as possible.
 
-Пример:
+Example:
 ```javascript
 import React from 'react';
 import RCR from 'react-component-redux';
@@ -75,6 +75,10 @@ export default class Hello extends React.Component {
 
 And it's all the code!
 
+We abstracted from low-level data management, which can always come back and got a **smart** component.
+No need to set no store, no need to write any _actions_ or _actionsCreators_ or _reducers_.
+Yes, of course, this approach is not universal, but it covers the simple use of **Redux**.
+
 Want even more clean code? You are welcome!
 
 ```javascript
@@ -108,10 +112,6 @@ export function random(state) {
   };
 }
 ```
-
-We abstracted from low-level data management, which can always come back and got a **smart** component.
-No need to set no store, no need to write any _actions_ or _actionsCreators_ or _reducers_.
-Yes, of course, this approach is not universal, but it covers the simple use of **Redux**.
 
 ## Multiple use of components
 
