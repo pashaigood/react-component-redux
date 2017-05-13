@@ -15,14 +15,15 @@ export function actionType(actionName) {
 export function functionName(fun) {
   let ret;
   if (process.env.NODE_ENV === 'production') {
-    fun.key = fun.key || componentCounter++;
-    ret = `rcr${fun.key}`;
+    ret = fun.component || `rcr${++componentCounter}`;
   }
   else {
     ret = fun.toString();
     ret = ret.substr('function '.length);
     ret = ret.substr(0, ret.indexOf('('));
   }
+
+  fun.component = ret;
 
   return ret;
 }
@@ -109,20 +110,20 @@ export function unRegisterReducers(reducersToUnregister) {
 export function mapActions(reducers, rootReducers) {
 
   let actionType = this.actionType.bind(this);
-  let component = this.name;
-  let name = this._name;
-  const _createAction = createAction.bind(null, component, name, this.props.name);
+  let instance = this.name;
+  let component = this._name;
+  const createComponentInstanceAction = createAction.bind(null, instance, component, this.props.name);
 
   this.actions = Object.keys(reducers).reduce((actions, actionName) => {
     if (typeof reducers[actionName] != 'function') {
       return actions;
     }
-    actions[actionName] = _createAction(actionName, actionType(actionName));
+    actions[actionName] = createComponentInstanceAction(actionName, actionType(actionName));
     return actions;
   }, {});
 
   rootReducers && Object.keys(rootReducers).map(actionName => {
-    this[actionName] = _createAction(actionName, actionType(actionName));
+    this[actionName] = createComponentInstanceAction(actionName, actionType(actionName));
   });
 }
 
@@ -131,10 +132,12 @@ export function mapActions(reducers, rootReducers) {
  *
  * @param component
  * @param name
+ * @param instance
+ * @param actionName
  * @param type
  * @returns {Function}
  */
-function createAction(component, name, instance, actionName, type) {
+function createAction(instance, component, name, actionName, type) {
   return function (...payload) {
     return store.dispatch({
       meta: {

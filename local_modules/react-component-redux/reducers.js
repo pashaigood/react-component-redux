@@ -26,7 +26,7 @@ export default function rcr(state = {}, action) {
     {
       return {
         ...state,
-        [payload.name]: module.hot && state[payload.name] ? state[payload.name] : payload.state
+        [payload.instance]: state[payload.instance] !== void 0 ? state[payload.instance] : payload.state
       };
     }
     default:
@@ -34,7 +34,7 @@ export default function rcr(state = {}, action) {
       if (meta !== void 0) {
         return typeof rcr[type] === 'function' ? {
           ...state,
-          [meta.component]: rcr[type](state[meta.component], ...payload)
+          [meta.instance]: rcr[type](state[meta.instance], ...payload)
         } : state;
       }
       else {

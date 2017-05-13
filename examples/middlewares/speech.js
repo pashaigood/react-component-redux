@@ -11,17 +11,17 @@ const speechMiddleware = store => next => action => {
 
   const {meta, payload} = action;
 
-  switch (meta.name) {
-    case Hello.name:
+  switch (meta.component) {
+    case Hello.component:
     {
-      sayHello(store, meta.component);
+      sayHello(store, meta.instance);
       break;
     }
-    case TodoList.name: {
+    case TodoList.component: {
       switch (meta.actionName) {
         case "addItem":
         {
-          const state = store.getState()[meta.component];
+          const state = store.getState()[meta.instance];
 
           speech({text: `Вам нужно: ${state.get('name')}`});
           break;
@@ -29,7 +29,7 @@ const speechMiddleware = store => next => action => {
         case "toggleTodo":
         {
           const [id] = payload;
-          const state = store.getState()[meta.component];
+          const state = store.getState()[meta.instance];
           const item = state.get('todos').find(item => item.get('id') == id);
 
           speech({text: `Вы ${item.get('done') ? 'не' : ''} сделаи: ${item.get('name')}`})
@@ -45,8 +45,8 @@ const speechMiddleware = store => next => action => {
 };
 
 
-const sayHello = _debounce((store, component) => {
-  const state = store.getState()[component];
+const sayHello = _debounce((store, instance) => {
+  const state = store.getState()[instance];
   speech({text: `Привет ${state.name} ${state.counter} раз!`});
 }, 600);
 
