@@ -7,7 +7,15 @@ import MultiInstance from './components/MultiInstance';
 import PureComponent from './components/Pure/Component';
 import PureFunction from './components/Pure/Function';
 import PureFunction2 from './components/Pure/Function2';
+import Classic from './components/Classic';
 import './middlewares/speech';
+import RCR from 'react-component-redux';
+import {Provider} from 'react-redux';
+
+
+RCR.store.subscribe((...params) => {
+  console.log('store changed')
+});
 
 ReactDOM.render(
   <div className="container">
@@ -35,6 +43,13 @@ ReactDOM.render(
       </div>
       <div className="col-xs-3">
         <PureFunction2/>
+      </div>
+    </div>
+    <div className="row">
+      <div className="col-xs-12">
+        <Provider store={RCR.store}>
+          <Classic/>
+        </Provider>
       </div>
     </div>
   </div>

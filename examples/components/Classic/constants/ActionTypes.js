@@ -1,0 +1,1 @@
+export const CLASSIC_CHANGE = 'CLASSIC_CHANGE';
