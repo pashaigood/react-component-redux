@@ -3,7 +3,6 @@ import {registerComponent} from './actions';
 
 export const Additional = {
   add(name, func) {
-    // rcr[name] = func;
     Additional[name] = func;
     require('./store').default.dispatch(registerComponent(name, func(void 0, {type: '@@INIT'})));
   }

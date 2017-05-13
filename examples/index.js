@@ -12,11 +12,6 @@ import './middlewares/speech';
 import RCR from 'react-component-redux';
 import {Provider} from 'react-redux';
 
-
-RCR.store.subscribe((...params) => {
-  console.log('store changed')
-});
-
 ReactDOM.render(
   <div className="container">
     <div className="row">
