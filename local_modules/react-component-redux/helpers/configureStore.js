@@ -22,6 +22,7 @@ function configureStoreProd(initialState) {
 
 
 function configureStoreDev(initialState) {
+  console.log('created');
   const middlewares = [
     // Add other middleware on this line...
     commonMiddleware,

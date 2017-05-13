@@ -1,7 +1,7 @@
 /**
  * @author PBelugin
  */
-import * as ActionTypes from '../constants/ActionTypes';
+import {registerComponent} from '../actions';
 import reducers from '../reducers';
 import store from '../store';
 import _snakeCase from 'lodash/snakeCase';
@@ -33,13 +33,7 @@ export function componentWillMount() {
   this.actions = this.actions || {};
   this.rootActions = this.rootActions || {};
 
-  store.dispatch({
-    type: ActionTypes.RCR_COMPONENT_REGISTER,
-    payload: {
-      name: this.name,
-      state: this.state
-    }
-  });
+  store.dispatch(registerComponent(this.name, this.state));
 
   this.trySubscribe();
   this.registerReducers({...this.actions, ...this.rootActions});

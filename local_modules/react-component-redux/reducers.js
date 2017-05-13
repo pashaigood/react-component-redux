@@ -1,4 +1,13 @@
 import * as ActionTypes from './constants/ActionTypes';
+import {registerComponent} from './actions';
+
+export const Additional = {
+  add(name, func) {
+    // rcr[name] = func;
+    Additional[name] = func;
+    require('./store').default.dispatch(registerComponent(name, func(void 0, {type: '@@INIT'})));
+  }
+};
 
 /**
  *
@@ -19,14 +28,24 @@ export default function rcr(state = {}, action) {
       return {
         ...state,
         [payload.name]: module.hot && state[payload.name] ? state[payload.name] : payload.state
-      }
+      };
     }
     default:
     {
-      return typeof rcr[type] === 'function' ? {
-        ...state,
-        [meta.component]: rcr[type](state[meta.component], ...payload)
-      } : state;
+      if (meta !== void 0) {
+        return typeof rcr[type] === 'function' ? {
+          ...state,
+          [meta.component]: rcr[type](state[meta.component], ...payload)
+        } : state;
+      }
+      else {
+        return Object.keys(Additional).reduce((state, key) => {
+          if (key !== 'add') {
+            state[key] = Additional[key](state[key], action);
+          }
+          return state;
+        }, {...state});
+      }
     }
   }
 };

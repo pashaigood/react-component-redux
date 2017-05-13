@@ -4,6 +4,7 @@ import container from './decorators/container';
 import action from './decorators/action';
 import pure from './decorators/pure';
 import middlewares from './middlewares';
+import {Additional} from './reducers';
 
 
 // /**
@@ -34,5 +35,6 @@ export default {
    */
   store,
 
+  reducers: Additional,
   middlewares
 };
