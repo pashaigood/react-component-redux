@@ -1,7 +1,7 @@
 import RCR from 'react-component-redux';
 import speech from '../services/speech';
-import Hello from '../containers/Hello';
-import TodoList from '../containers/TodoList';
+import Hello from '../components/Hello';
+import TodoList from '../components/TodoList';
 import _debounce from 'lodash/debounce';
 
 const speechMiddleware = store => next => action => {

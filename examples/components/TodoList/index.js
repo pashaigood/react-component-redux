@@ -1,7 +1,7 @@
 import React from 'react';
 import RCR from 'react-component-redux';
 import Immutable from 'immutable';
-import List from '../components/todoList/List';
+import List from './widgets/List';
 
 const {Component} = RCR;
 let todoId = 0;

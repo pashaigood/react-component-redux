@@ -1,12 +1,12 @@
 import './index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Hello from './containers/Hello';
-import TodoList from './containers/TodoList';
-import MultiInstance from './containers/MultiInstance';
-import PureComponent from './containers/Pure/Component';
-import PureFunction from './containers/Pure/Function';
-import PureFunction2 from './containers/Pure/Function2';
+import Hello from './components/Hello';
+import TodoList from './components/TodoList';
+import MultiInstance from './components/MultiInstance';
+import PureComponent from './components/Pure/Component';
+import PureFunction from './components/Pure/Function';
+import PureFunction2 from './components/Pure/Function2';
 import './middlewares/speech';
 
 ReactDOM.render(
