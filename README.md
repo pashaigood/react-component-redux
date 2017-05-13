@@ -1,4 +1,6 @@
 # RCR [![Build Status](https://travis-ci.org/pashaigood/react-component-redux.svg?branch=master)](https://travis-ci.org/pashaigood/react-component-redux) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+Demo: https://pashaigood.github.io/react-component-redux/
+
 **Redux** a great library, that's just too low-level for everyday use.
 
 The idea is to simplify the usage and make the process of creating components as quickly as possible.
