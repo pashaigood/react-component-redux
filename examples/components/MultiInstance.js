@@ -5,7 +5,7 @@ import RCR from 'react-component-redux';
  * @author PBelugin
  */
 @RCR.container
-export default class MultiInstance extends React.Component{
+export default class MultiInstance extends React.Component {
   static propTypes = {
     title: React.PropTypes.string
   };
@@ -33,7 +33,7 @@ export default class MultiInstance extends React.Component{
           className="form-control"
           value={text}
           onChange={e => this.changeName(e.target.value)}
-        ></textarea>
+        />
         <br/>
         <br/>
         <pre>{text || 'Type somth...'}</pre>

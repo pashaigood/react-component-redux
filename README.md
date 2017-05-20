@@ -7,12 +7,10 @@ The idea is to simplify the usage and make the process of creating components as
 
 Example:
 ```javascript
-import React from 'react';
 import RCR from 'react-component-redux';
 
-// Apply the decorator.
-@RCR.container
-export default class Hello extends React.Component {
+// Inherit from the RCR component.
+export default class Hello extends RCR.Component {
 
   /**
    * Write the initial state.
@@ -48,7 +46,10 @@ export default class Hello extends React.Component {
     }
   };
 
+  // It's better to move this template to a external entity.
+  // And don't have any render library relations.
   render() {
+    const React = require('react');
     return (
       <div>
         <h1>Hello {this.state.name} {this.state.counter} times!</h1>
